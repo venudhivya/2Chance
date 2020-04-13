@@ -20,21 +20,13 @@ public class resetpwdwithOTPModel {
         this.password = password;
     }
 
-    public String getConformpassword() {
-        return conformpassword;
-    }
 
-    public void setConformpassword(String conformpassword) {
-        this.conformpassword = conformpassword;
-    }
 
     String password;
-    String conformpassword;
 
-    public resetpwdwithOTPModel(String email,String password,String conformpassword)
+    public resetpwdwithOTPModel(String email,String password)
     {
         this.email = email;
         this.password = password;
-        this.conformpassword = conformpassword;
     }
 }

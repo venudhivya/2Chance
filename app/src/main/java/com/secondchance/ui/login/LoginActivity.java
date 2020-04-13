@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.secondchance.MainActivity;
 import com.secondchance.R;
 import com.secondchance.SecondChanceApplication;
@@ -22,9 +23,11 @@ import com.secondchance.model.registerrequestmodel;
 import com.secondchance.model.registerresponsemodel;
 import com.secondchance.service.RetrofitApi;
 import com.secondchance.service.RetrofitRestClient;
+import com.secondchance.ui.HomeActivity;
 import com.secondchance.ui.forgotpassword.ForgotPasswordActivity;
 import com.secondchance.ui.register.RegisterAppActivity;
 import com.secondchance.utils.Configuration;
+import com.secondchance.utils.StorageUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,14 +43,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ProgressBar loading;
     EditText password;
     EditText emailid;
+    TextInputLayout email_textinputlayout;
+    TextInputLayout password_textinputlayout;
+    StorageUtil mStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadeout, R.anim.fadein);
         setContentView(R.layout.login_layout);
+        mStore = StorageUtil.getInstance(getApplicationContext());
+
         secondChanceApplication = (SecondChanceApplication) getApplicationContext();
         loading = findViewById(R.id.loading);
+        email_textinputlayout = findViewById(R.id.email_textinputlayout);
+        password_textinputlayout = findViewById(R.id.password_textinputlayout);
         password = findViewById(R.id.password);
         emailid = findViewById(R.id.emailid);
         login_btn = findViewById(R.id.login_btn);
@@ -71,17 +81,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onResponse(Call<loginreponsemodel> call, Response<loginreponsemodel> response) {
                     loading.setVisibility(View.GONE);
+                    mStore.setString("USERACTIVITY","LOGIN");
 
                     loginreponsemodel loginreponsemodel = response.body();
-
                     String success = loginreponsemodel.getSuccess();
                     data data = loginreponsemodel.getData();
                     String email = data.getEmail();
                     String password = data.getPassword();
+                    mStore.setString("USERNAME", data.getUser_name());
+                    mStore.setString("PHONENUMBER",data.getPhone_number());
+                    mStore.setString("emailid", data.getEmail());
+
 
                     if (success.equals("true")) {
                         Toast.makeText(getApplicationContext(), "LOGIN Successfull", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
                         finish();
 //                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -124,10 +138,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             boolean isPasswordValid = false;
 
             if (emailid.getText().toString().isEmpty()) {
-                emailid.setError(getResources().getString(R.string.email_error));
+                email_textinputlayout.setError(getResources().getString(R.string.email_error));
                 isEmailValid = false;
             } else if (!Patterns.EMAIL_ADDRESS.matcher(emailid.getText().toString()).matches()) {
-                emailid.setError(getResources().getString(R.string.error_invalid_email));
+                email_textinputlayout.setError(getResources().getString(R.string.error_invalid_email));
                 isEmailValid = false;
             } else {
                 isEmailValid = true;
@@ -136,10 +150,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             // Check for a valid password.
             if (password.getText().toString().isEmpty()) {
-                password.setError(getResources().getString(R.string.password_error));
+                password_textinputlayout.setError(getResources().getString(R.string.password_error));
                 isPasswordValid = false;
             } else if (password.getText().length() < 6) {
-                password.setError(getResources().getString(R.string.error_invalid_password));
+                password_textinputlayout.setError(getResources().getString(R.string.error_invalid_password));
                 isPasswordValid = false;
             } else {
                 isPasswordValid = true;

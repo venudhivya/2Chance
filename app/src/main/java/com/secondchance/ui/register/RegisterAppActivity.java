@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.secondchance.R;
 import com.secondchance.SecondChanceApplication;
 import com.secondchance.model.data;
@@ -21,6 +22,7 @@ import com.secondchance.model.registerrequestmodel;
 import com.secondchance.model.registerresponsemodel;
 import com.secondchance.service.RetrofitApi;
 import com.secondchance.service.RetrofitRestClient;
+import com.secondchance.ui.HomeActivity;
 import com.secondchance.ui.forgotpassword.ForgotPwdReenterActivity;
 import com.secondchance.ui.login.LoginActivity;
 import com.secondchance.utils.Configuration;
@@ -44,6 +46,10 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
     ProgressBar loading;
     StorageUtil mStore;
     ImageView facebook_img;
+    TextInputLayout password_textinputlayout;
+    TextInputLayout email_textinputlayout;
+    TextInputLayout username_textinputlayout;
+    TextInputLayout phonenum_textinputlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,12 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
         mStore = StorageUtil.getInstance(getApplicationContext());
         register_btn = findViewById(R.id.register_btn);
         signin_btn = findViewById(R.id.signin_btn);
+        password_textinputlayout= findViewById(R.id.password_textinputlayout);
+        email_textinputlayout = findViewById(R.id.email_textinputlayout);
+        username_textinputlayout = findViewById(R.id.username_textinputlayout);
+
+        phonenum_textinputlayout = findViewById(R.id.phonenum_textinputlayout);
+
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         phone_num = findViewById(R.id.phone_num);
@@ -75,7 +87,7 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
             //creating the api interface
             RetrofitApi api = new RetrofitRestClient().urlInfoRetrofit(Configuration.BASE_URL);
 
-            final registerrequestmodel registerrequestmodel = new registerrequestmodel(email.getText().toString(), password.getText().toString(), phone_num.getText().toString());
+            final registerrequestmodel registerrequestmodel = new registerrequestmodel(email.getText().toString(), password.getText().toString(), phone_num.getText().toString(),username_text.getText().toString());
             Call<registerresponsemodel> call = api.getregisterResponse(registerrequestmodel);
 
             call.enqueue(new Callback<registerresponsemodel>() {
@@ -89,12 +101,13 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
                     String userid = data.getUserId();
                     mStore.setString("USERID", userid);
                     mStore.setString("USERNAME", username_text.getText().toString());
+                    mStore.setString("USERACTIVITY","REGISTER");
                     String message = data.getMessage();
 
                     if (success.equals("true")) {
                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
                         finish();
                     } else if (success.equals("false")) {
@@ -137,7 +150,7 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
 
 
         } else if (id == R.id.signin_btn) {
-            Intent intent = new Intent(this, LoginActivity.class);
+            Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
             finish();
         } else if (id == R.id.facebook_img) {
@@ -157,10 +170,10 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
         boolean isNameValid = false;
 
         if (email.getText().toString().isEmpty()) {
-            email.setError(getResources().getString(R.string.email_error));
+            email_textinputlayout.setError(getResources().getString(R.string.email_error));
             isEmailValid = false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
-            email.setError(getResources().getString(R.string.error_invalid_email));
+            email_textinputlayout.setError(getResources().getString(R.string.error_invalid_email));
             isEmailValid = false;
         } else {
             isEmailValid = true;
@@ -169,10 +182,10 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
 
         // Check for a valid password.
         if (password.getText().toString().isEmpty()) {
-            password.setError(getResources().getString(R.string.password_error));
+            password_textinputlayout.setError(getResources().getString(R.string.password_error));
             isPasswordValid = false;
         } else if (password.getText().length() < 6) {
-            password.setError(getResources().getString(R.string.error_invalid_password));
+            password_textinputlayout.setError(getResources().getString(R.string.error_invalid_password));
             isPasswordValid = false;
         } else {
             isPasswordValid = true;
@@ -181,10 +194,10 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
 
         // Check for a valid phone number.
         if (phone_num.getText().toString().isEmpty()) {
-            phone_num.setError(getResources().getString(R.string.phone_error));
+            phonenum_textinputlayout.setError(getResources().getString(R.string.phone_error));
             isPhoneValid = false;
         } else if (phone_num.getText().length() < 10 || phone_num.getText().length() > 10) {
-            phone_num.setError(getResources().getString(R.string.error_invalid_phone));
+            phonenum_textinputlayout.setError(getResources().getString(R.string.error_invalid_phone));
         } else {
             isPhoneValid = true;
         }
@@ -192,7 +205,7 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
 
         // Check for a valid name.
         if (username_text.getText().toString().isEmpty()) {
-            username_text.setError(getResources().getString(R.string.name_error));
+            username_textinputlayout.setError(getResources().getString(R.string.name_error));
             isNameValid = false;
         } else {
             isNameValid = true;

@@ -144,7 +144,7 @@
         android:paddingRight="80dp"
         android:textSize="18sp"
 android:textStyle="bold"
-        android:text="@string/next"
+        android:text="@string/done"
         android:textColor="#ffffff" />
 
     <ProgressBar

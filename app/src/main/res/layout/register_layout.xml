@@ -25,32 +25,114 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="20dp"
-                android:textStyle="bold"
                 android:text="@string/create_new_account"
-                android:textColor="@color/gray"></TextView>
+                android:textColor="@color/gray"
+                android:textSize="20dp"
+                android:textStyle="bold"></TextView>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginEnd="24dp"
                 android:text="@string/your_email"
 
                 android:textColor="@color/gray"></TextView>
 
-            <EditText
-                android:id="@+id/email"
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:id="@+id/email_textinputlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="15dp"
-                android:autofillHints="@string/prompt_email"
-                android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress"
-                android:selectAllOnFocus="true" />
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/gray"
+                android:textColorHint="@color/gray"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@string/prompt_email"
+                    android:hint="@string/prompt_email"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress"
+                    android:selectAllOnFocus="true"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/create_your_username"
+
+                android:textColor="@color/gray"></TextView>
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:id="@+id/username_textinputlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/gray"
+                android:textColorHint="@color/gray"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/username_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@string/prompt_username"
+                    android:hint="@string/prompt_username"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:selectAllOnFocus="true"></com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/your_phone_num"
+
+                android:textColor="@color/gray"></TextView>
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:id="@+id/phonenum_textinputlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/gray"
+                android:textColorHint="@color/gray"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@string/prompt_phone_num"
+                    android:hint="@string/prompt_phone_num"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true"></com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -63,7 +145,8 @@
                 android:textColor="@color/gray"></TextView>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/filledTextField"
+
+                android:id="@+id/password_textinputlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -73,6 +156,7 @@
                 android:textColorHint="@color/gray"
                 app:hintEnabled="false"
                 app:passwordToggleEnabled="true">
+
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
@@ -89,76 +173,7 @@
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
-            <!--            <EditText-->
 
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginStart="24dp"-->
-            <!--                android:layout_marginTop="8dp"-->
-            <!--                android:layout_marginEnd="24dp"-->
-            <!--                android:autofillHints="@string/prompt_password"-->
-            <!--                android:hint="@string/prompt_password"-->
-            <!--                android:imeActionLabel="@string/action_sign_in_short"-->
-            <!--                android:imeOptions="actionDone"-->
-            <!--                android:inputType="textPassword"-->
-            <!--                android:selectAllOnFocus="true"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/username" />-->
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/your_phone_num"
-
-                android:textColor="@color/gray"></TextView>
-
-            <EditText
-                android:id="@+id/phone_num"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
-                android:autofillHints="@string/prompt_password"
-                android:hint="@string/prompt_phone_num"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionDone"
-                android:inputType="number"
-                android:selectAllOnFocus="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/username" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="24dp"
-                android:text="@string/create_your_username"
-
-                android:textColor="@color/gray"></TextView>
-
-            <EditText
-                android:id="@+id/username_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
-                android:autofillHints="@string/prompt_username"
-                android:hint="@string/prompt_username"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionDone"
-                android:inputType="text"
-                android:selectAllOnFocus="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/username" />
 
             <Button
                 android:id="@+id/register_btn"
@@ -226,8 +241,8 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
-                android:gravity="center"
                 android:layout_marginBottom="10dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView

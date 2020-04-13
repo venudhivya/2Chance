@@ -12,9 +12,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.secondchance.MainActivity;
 import com.secondchance.R;
 import com.secondchance.SecondChanceApplication;
+import com.secondchance.model.forgotpwdchangereponse;
 import com.secondchance.model.forgotpwdreponsemodel;
 import com.secondchance.model.otpvalidaterequestmodel;
 import com.secondchance.model.resetpwdwithOTPModel;
@@ -31,6 +33,8 @@ import retrofit2.Response;
 public class ForgotPwdNewpwdActivity extends AppCompatActivity implements View.OnClickListener {
     LinearLayout linear_pwd;
     Button next_btn;
+    TextInputLayout password_textlayout;
+    TextInputLayout repassword_text_input;
     TextInputEditText password;
     TextInputEditText re_password;
     SecondChanceApplication secondChanceApplication;
@@ -45,6 +49,8 @@ public class ForgotPwdNewpwdActivity extends AppCompatActivity implements View.O
         secondChanceApplication = (SecondChanceApplication) getApplicationContext();
         mStore = StorageUtil.getInstance(getApplicationContext());
         setContentView(R.layout.forgotpwd_new_layout);
+        repassword_text_input = findViewById(R.id.repassword_text_input);
+        password_textlayout = findViewById(R.id.password_textinputlayout);
         password = findViewById(R.id.password);
         re_password = findViewById(R.id.re_password);
         linear_pwd = findViewById(R.id.linear_pwd);
@@ -62,24 +68,24 @@ public class ForgotPwdNewpwdActivity extends AppCompatActivity implements View.O
             //creating the api interface
             RetrofitApi api = new RetrofitRestClient().urlInfoRetrofit(Configuration.BASE_URL);
 
-            final resetpwdwithOTPModel otpvalidaterequestmodel = new resetpwdwithOTPModel(mStore.getString("emailid"), password.getText().toString(), re_password.getText().toString());
-            Call<forgotpwdreponsemodel> call = api.getresetpwdwithOTPResponse(otpvalidaterequestmodel);
+            final resetpwdwithOTPModel otpvalidaterequestmodel = new resetpwdwithOTPModel(mStore.getString("emailid"), password.getText().toString());
+            Call<forgotpwdchangereponse> call = api.getresetpwdwithOTPResponse(otpvalidaterequestmodel);
 
-            call.enqueue(new Callback<forgotpwdreponsemodel>() {
+            call.enqueue(new Callback<forgotpwdchangereponse>() {
                 @Override
-                public void onResponse(Call<forgotpwdreponsemodel> call, Response<forgotpwdreponsemodel> response) {
+                public void onResponse(Call<forgotpwdchangereponse> call, Response<forgotpwdchangereponse> response) {
                     loading.setVisibility(View.GONE);
 
-                    forgotpwdreponsemodel forgotpwdreponsemodel = response.body();
+                    forgotpwdchangereponse forgotpwdchangereponse = response.body();
 
-                    String success = forgotpwdreponsemodel.getSuccess();
-                    String data = forgotpwdreponsemodel.getData();
+                    String success = forgotpwdchangereponse.getSuccess();
+                    String data = forgotpwdchangereponse.getData();
 
 
                     if (success.equals("true")) {
                         Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), ForgotPwdMsgActivity.class);
                         startActivity(intent);
                         finish();
                     } else if (success.equals("false")) {
@@ -94,7 +100,7 @@ public class ForgotPwdNewpwdActivity extends AppCompatActivity implements View.O
                 }
 
                 @Override
-                public void onFailure(Call<forgotpwdreponsemodel> call, Throwable t) {
+                public void onFailure(Call<forgotpwdchangereponse> call, Throwable t) {
                     loading.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Failed to validate OTP", Toast.LENGTH_SHORT).show();
 
@@ -118,20 +124,20 @@ public class ForgotPwdNewpwdActivity extends AppCompatActivity implements View.O
             boolean isreenterpass = false;
             // Check for a valid password.
             if (password.getText().toString().isEmpty()) {
-                password.setError(getResources().getString(R.string.password_error));
+                password_textlayout.setError(getResources().getString(R.string.password_error));
                 ispass = false;
             } else if (password.getText().length() < 6) {
-                password.setError(getResources().getString(R.string.error_invalid_password));
+                password_textlayout.setError(getResources().getString(R.string.error_invalid_password));
                 ispass = false;
             } else {
                 ispass = true;
             }
 
             if (re_password.getText().toString().isEmpty()) {
-                re_password.setError(getResources().getString(R.string.password_error));
+                repassword_text_input.setError(getResources().getString(R.string.password_error));
                 isreenterpass = false;
             } else if (re_password.getText().length() < 6) {
-                re_password.setError(getResources().getString(R.string.error_invalid_password));
+                repassword_text_input.setError(getResources().getString(R.string.error_invalid_password));
                 isreenterpass = false;
             } else {
                 isreenterpass = true;

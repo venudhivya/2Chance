@@ -9,6 +9,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.secondchance.R;
+import com.secondchance.ui.HomeActivity;
 import com.secondchance.ui.register.RegisterAppActivity;
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {

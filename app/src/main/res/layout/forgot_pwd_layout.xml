@@ -83,19 +83,28 @@
                     android:textSize="16sp"></TextView>
 
 
-                <EditText
-                    android:id="@+id/emailid"
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/phonenum_textinputlayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="20dp"
-                    android:autofillHints="@string/prompt_email"
-                    android:hint="@string/your_email"
-                    android:inputType="textEmailAddress"
-                    android:selectAllOnFocus="true" />
+                    android:textColor="@color/gray"
+                    android:textColorHint="@color/gray"
+                    app:hintEnabled="false">
 
-
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phone_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="@string/prompt_phone_num"
+                        android:hint="@string/prompt_phone_num"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:selectAllOnFocus="true"></com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
 

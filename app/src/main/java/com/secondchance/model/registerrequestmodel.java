@@ -5,11 +5,22 @@ public class registerrequestmodel {
     String email;
     String password;
     String phone_number;
-    public registerrequestmodel(String email,String password, String phone_num)
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    String user_name;
+    public registerrequestmodel(String email,String password, String phone_num,String user_name)
     {
         this.email = email;
         this.password = password;
         this.phone_number = phone_num;
+        this.user_name = user_name;
     }
 
 

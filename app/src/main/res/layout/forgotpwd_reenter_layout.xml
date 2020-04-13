@@ -72,7 +72,7 @@
             android:textStyle="bold"></TextView>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/filledTextField"
+            android:id="@+id/current_pwd_textinput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -100,7 +100,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/filledTextField1"
+            android:id="@+id/newpwd_textinput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -128,7 +128,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/filledTextField2"
+            android:id="@+id/confirm_textinput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

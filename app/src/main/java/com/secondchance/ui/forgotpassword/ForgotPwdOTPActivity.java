@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.secondchance.R;
 import com.secondchance.SecondChanceApplication;
+import com.secondchance.model.data;
 import com.secondchance.model.forgotpwdreponsemodel;
 import com.secondchance.model.forgotpwdrequestmodel;
 import com.secondchance.model.otpvalidaterequestmodel;
@@ -77,17 +78,18 @@ ProgressBar loading;
                     forgotpwdreponsemodel forgotpwdreponsemodel = response.body();
 
                     String success = forgotpwdreponsemodel.getSuccess();
-                    String data = forgotpwdreponsemodel.getData();
+                    data data = forgotpwdreponsemodel.getData();
 
+                    mStore.setString("emailid", data.getEmail());
 
                     if (success.equals("true")) {
-                        Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "data", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(getApplicationContext(), ForgotPwdNewpwdActivity.class);
                         startActivity(intent);
                         finish();
                     } else if (success.equals("false")) {
-                        Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "data", Toast.LENGTH_SHORT).show();
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Failed! Enter valid OTP", Toast.LENGTH_SHORT).show();

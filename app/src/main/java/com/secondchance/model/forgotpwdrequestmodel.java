@@ -2,19 +2,20 @@ package com.secondchance.model;
 
 public class forgotpwdrequestmodel {
 
-    public String getEmail() {
-        return email;
+
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
-    String email;
+    String phone_number;
 
-    public forgotpwdrequestmodel(String email)
+    public forgotpwdrequestmodel(String phone_number)
     {
-        this.email = email;
+        this.phone_number = phone_number;
     }
 
 }

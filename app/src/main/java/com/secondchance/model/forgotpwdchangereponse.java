@@ -1,7 +1,6 @@
 package com.secondchance.model;
 
-public class forgotpwdreponsemodel {
-
+public class forgotpwdchangereponse {
     public String getSuccess() {
         return success;
     }
@@ -13,12 +12,14 @@ public class forgotpwdreponsemodel {
     String success;
 
 
-    public com.secondchance.model.data getData() {
+    public String getData() {
         return data;
     }
 
-    data data;
+    public void setData(String data) {
+        this.data = data;
+    }
 
-
+    String data;
 
 }

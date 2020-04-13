@@ -37,6 +37,10 @@
     android:screenOrientation="portrait"></activity>
         <activity android:name=".ui.forgotpassword.ForgotPwdReenterActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.forgotpassword.ForgotPwdMsgActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.HomeActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

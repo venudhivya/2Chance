@@ -4,6 +4,23 @@
     <string name="prompt_password">Password</string>
     <string name="prompt_username">Username</string>
     <string name="prompt_phone_num">Phone Number</string>
+    <string name="menu_dashboard">Dashboard</string>
+    <string name="menu_myaccount">My Account</string>
+    <string name="menu_addpeople">Add People</string>
+    <string name="menu_pending">Pending Nominate</string>
+    <string name="menu_upcoming">Upcoming Messages</string>
+    <string name="menu_previous">Previous Messages</string>
+    <string name="menu_share">Share with Friends</string>
+    <string name="menu_terms">Terms &amp; Policies</string>
+    <string name="menu_subscription">Subscription</string>
+    <string name="menu_logout">Logout</string>
+<string name="sucess_msg">Successfully you registered.</string>
+    <string name="click_message">Click on +People button to add a new people</string>
+    <string name="people_text">+PEOPLE</string>
+    <string name="password_text">Password Changed.</string>
+    <string name="password_sucess_msg">Your Password has been reset suceessfully.</string>
+    <string name="continue_txt">CONTINUE</string>
+
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome to Second Chance"</string>
@@ -43,4 +60,9 @@
     <string name="error_invalid_email">Email is not valid</string>
     <string name="password_error">Please enter a password</string>
     <string name="error_invalid_password">Please enter a minimum password of 6 characters</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
 </resources>

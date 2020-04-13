@@ -3,6 +3,7 @@ package com.secondchance.service;
 
 
 import com.google.gson.JsonObject;
+import com.secondchance.model.forgotpwdchangereponse;
 import com.secondchance.model.forgotpwdreponsemodel;
 import com.secondchance.model.forgotpwdrequestmodel;
 import com.secondchance.model.loginreponsemodel;
@@ -26,7 +27,7 @@ import retrofit2.http.Query;
 
 public interface RetrofitApi {
 
-    @POST("create_user")
+    @POST("createUser")
     Call<registerresponsemodel> getregisterResponse(@Body registerrequestmodel jsonObject);
 
 
@@ -42,13 +43,13 @@ public interface RetrofitApi {
 
 
 
-    @POST("resetPasswordwithOtp")
-    Call<forgotpwdreponsemodel> getresetpwdwithOTPResponse(@Body resetpwdwithOTPModel jsonObject);
+    @POST("resetPassword")
+    Call<forgotpwdchangereponse> getresetpwdwithOTPResponse(@Body resetpwdwithOTPModel jsonObject);
 
 
 
     @POST("changePassword")
-    Call<forgotpwdreponsemodel> getreenterpwdResponse(@Body resetpwdrequestodel jsonObject);
+    Call<forgotpwdchangereponse> getreenterpwdResponse(@Body resetpwdrequestodel jsonObject);
 
 
 

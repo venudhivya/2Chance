@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.secondchance.MainActivity;
 import com.secondchance.R;
 import com.secondchance.SecondChanceApplication;
@@ -34,13 +35,14 @@ import retrofit2.Response;
 public class ForgotPasswordActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button next_btn;
-    EditText emailid;
+    EditText phone_num;
     ImageView img_forgot_pwd;
     LinearLayout linear_email;
     SecondChanceApplication secondChanceApplication;
     StorageUtil mStore;
     ProgressBar loading;
     ImageView back_img;
+    TextInputLayout phonenum_textinputlayout;
 
 
     @Override
@@ -49,10 +51,12 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         overridePendingTransition(R.anim.fadeout, R.anim.fadein);
         setContentView(R.layout.forgot_pwd_layout);
         secondChanceApplication = (SecondChanceApplication) getApplicationContext();
+        phonenum_textinputlayout = findViewById(R.id.phonenum_textinputlayout);
+
         mStore = StorageUtil.getInstance(getApplicationContext());
         loading = findViewById(R.id.loading);
         next_btn = findViewById(R.id.next_btn);
-        emailid = findViewById(R.id.emailid);
+        phone_num = findViewById(R.id.phone_num);
         img_forgot_pwd = findViewById(R.id.img_forgot_pwd);
         linear_email = findViewById(R.id.linear_email);
         next_btn.setOnClickListener(this);
@@ -67,7 +71,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
             //creating the api interface
             RetrofitApi api = new RetrofitRestClient().urlInfoRetrofit(Configuration.BASE_URL);
 
-            final forgotpwdrequestmodel forgotpwdrequestmodel = new forgotpwdrequestmodel(emailid.getText().toString());
+            final forgotpwdrequestmodel forgotpwdrequestmodel = new forgotpwdrequestmodel(phone_num.getText().toString());
             Call<forgotpwdreponsemodel> call = api.getforgotpwdResponse(forgotpwdrequestmodel);
 
             call.enqueue(new Callback<forgotpwdreponsemodel>() {
@@ -78,17 +82,17 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
                     forgotpwdreponsemodel forgotpwdreponsemodel = response.body();
 
                     String success = forgotpwdreponsemodel.getSuccess();
-                    String data = forgotpwdreponsemodel.getData();
-                    mStore.setString("emailid", emailid.getText().toString());
+                    data data = forgotpwdreponsemodel.getData();
+                    mStore.setString("emailid", data.getEmail());
 
                     if (success.equals("true")) {
-                        Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "OTP sent successfully", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(getApplicationContext(), ForgotPwdOTPActivity.class);
                         startActivity(intent);
                         finish();
                     } else if (success.equals("false")) {
-                        Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "OTP not sent", Toast.LENGTH_SHORT).show();
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Failed to sent email", Toast.LENGTH_SHORT).show();
@@ -119,20 +123,20 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.next_btn) {
-            boolean isEmailValid = false;
+            boolean isPhoneValid = false;
 
-            if (emailid.getText().toString().isEmpty()) {
-                emailid.setError(getResources().getString(R.string.email_error));
-                isEmailValid = false;
-            } else if (!Patterns.EMAIL_ADDRESS.matcher(emailid.getText().toString()).matches()) {
-                emailid.setError(getResources().getString(R.string.error_invalid_email));
-                isEmailValid = false;
+            // Check for a valid phone number.
+            if (phone_num.getText().toString().isEmpty()) {
+                phonenum_textinputlayout.setError(getResources().getString(R.string.phone_error));
+                isPhoneValid = false;
+            } else if (phone_num.getText().length() < 10 || phone_num.getText().length() > 10) {
+                phonenum_textinputlayout.setError(getResources().getString(R.string.error_invalid_phone));
             } else {
-                isEmailValid = true;
+                isPhoneValid = true;
             }
 
 
-            if (isEmailValid) {
+            if (isPhoneValid) {
                 callForgotPwdApi();
             }
 

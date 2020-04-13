@@ -11,8 +11,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.secondchance.R;
 import com.secondchance.SecondChanceApplication;
+import com.secondchance.model.forgotpwdchangereponse;
 import com.secondchance.model.forgotpwdreponsemodel;
 import com.secondchance.model.resetpwdrequestodel;
 import com.secondchance.model.resetpwdwithOTPModel;
@@ -35,6 +37,9 @@ public class ForgotPwdReenterActivity extends AppCompatActivity implements View.
     Button done;
     ProgressBar loading;
     ImageView back_img;
+    TextInputLayout current_pwd_textinput;
+    TextInputLayout newpwd_textinput;
+    TextInputLayout confirm_textinput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,9 @@ public class ForgotPwdReenterActivity extends AppCompatActivity implements View.
         current_password = findViewById(R.id.current_password);
         confirm_password = findViewById(R.id.confirm_password);
         new_password = findViewById(R.id.new_password);
+        current_pwd_textinput = findViewById(R.id.current_pwd_textinput);
+        newpwd_textinput = findViewById(R.id.newpwd_textinput);
+        confirm_textinput = findViewById(R.id.confirm_textinput);
         done = findViewById(R.id.next_btn);
         done.setOnClickListener(this);
         loading = findViewById(R.id.loading);
@@ -60,17 +68,17 @@ public class ForgotPwdReenterActivity extends AppCompatActivity implements View.
             RetrofitApi api = new RetrofitRestClient().urlInfoRetrofit(Configuration.BASE_URL);
 
             final resetpwdrequestodel resetpwdrequestodel = new resetpwdrequestodel(mStore.getString("emailid"), current_password.getText().toString(), new_password.getText().toString());
-            Call<forgotpwdreponsemodel> call = api.getreenterpwdResponse(resetpwdrequestodel);
+            Call<forgotpwdchangereponse> call = api.getreenterpwdResponse(resetpwdrequestodel);
 
-            call.enqueue(new Callback<forgotpwdreponsemodel>() {
+            call.enqueue(new Callback<forgotpwdchangereponse>() {
                 @Override
-                public void onResponse(Call<forgotpwdreponsemodel> call, Response<forgotpwdreponsemodel> response) {
+                public void onResponse(Call<forgotpwdchangereponse> call, Response<forgotpwdchangereponse> response) {
                     loading.setVisibility(View.GONE);
 
-                    forgotpwdreponsemodel forgotpwdreponsemodel = response.body();
+                    forgotpwdchangereponse forgotpwdchangereponse = response.body();
 
-                    String success = forgotpwdreponsemodel.getSuccess();
-                    String data = forgotpwdreponsemodel.getData();
+                    String success = forgotpwdchangereponse.getSuccess();
+                    String data = forgotpwdchangereponse.getData();
 
 
                     if (success.equals("true")) {
@@ -91,7 +99,7 @@ public class ForgotPwdReenterActivity extends AppCompatActivity implements View.
                 }
 
                 @Override
-                public void onFailure(Call<forgotpwdreponsemodel> call, Throwable t) {
+                public void onFailure(Call<forgotpwdchangereponse> call, Throwable t) {
                     loading.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Failed to validate OTP", Toast.LENGTH_SHORT).show();
 
@@ -117,30 +125,30 @@ public class ForgotPwdReenterActivity extends AppCompatActivity implements View.
             boolean isconfirmpass = false;
             // Check for a valid password.
             if (current_password.getText().toString().isEmpty()) {
-                current_password.setError(getResources().getString(R.string.password_error));
+                current_pwd_textinput.setError(getResources().getString(R.string.password_error));
                 iscurrentpass = false;
             } else if (current_password.getText().length() < 6) {
-                current_password.setError(getResources().getString(R.string.error_invalid_password));
+                current_pwd_textinput.setError(getResources().getString(R.string.error_invalid_password));
                 iscurrentpass = false;
             } else {
                 iscurrentpass = true;
             }
 
             if (new_password.getText().toString().isEmpty()) {
-                new_password.setError(getResources().getString(R.string.password_error));
+                newpwd_textinput.setError(getResources().getString(R.string.password_error));
                 isnewpass = false;
             } else if (new_password.getText().length() < 6) {
-                new_password.setError(getResources().getString(R.string.error_invalid_password));
+                newpwd_textinput.setError(getResources().getString(R.string.error_invalid_password));
                 isnewpass = false;
             } else {
                 isnewpass = true;
             }
 
             if (confirm_password.getText().toString().isEmpty()) {
-                confirm_password.setError(getResources().getString(R.string.password_error));
+                confirm_textinput.setError(getResources().getString(R.string.password_error));
                 isconfirmpass = false;
             } else if (confirm_password.getText().length() < 6) {
-                confirm_password.setError(getResources().getString(R.string.error_invalid_password));
+                confirm_textinput.setError(getResources().getString(R.string.error_invalid_password));
                 isconfirmpass = false;
             } else {
                 isconfirmpass = true;
@@ -162,7 +170,7 @@ public class ForgotPwdReenterActivity extends AppCompatActivity implements View.
             }
 
 
-        }else if (id == R.id.back_img) {
+        } else if (id == R.id.back_img) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
             finish();
