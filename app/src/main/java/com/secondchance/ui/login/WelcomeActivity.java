@@ -11,21 +11,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.secondchance.R;
 import com.secondchance.ui.HomeActivity;
 import com.secondchance.ui.register.RegisterAppActivity;
+import com.secondchance.utils.StorageUtil;
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
     Button login_button;
     Button register_button;
+    StorageUtil mStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadeout,R.anim.fadein);
         setContentView(R.layout.welcome_layout);
+        mStore = StorageUtil.getInstance(getApplicationContext());
+
+        if(mStore.getString("DashboardEnabled")!=null&& mStore.getString("DashboardEnabled").equalsIgnoreCase("true"))
+
+        {
+            Intent intent = new Intent(this,HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         login_button = findViewById(R.id.login_button);
         register_button = findViewById(R.id.register_button);
         login_button.setOnClickListener(this);
         register_button.setOnClickListener(this);
+
+
     }
 
     @Override

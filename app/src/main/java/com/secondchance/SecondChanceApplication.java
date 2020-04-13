@@ -20,6 +20,7 @@ public class SecondChanceApplication extends Application {
 
     }
 
+
     @SuppressLint("ObsoleteSdkInt")
     public boolean isNetworkAvailable() {
 

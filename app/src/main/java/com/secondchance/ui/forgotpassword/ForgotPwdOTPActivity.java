@@ -83,13 +83,13 @@ ProgressBar loading;
                     mStore.setString("emailid", data.getEmail());
 
                     if (success.equals("true")) {
-                        Toast.makeText(getApplicationContext(), "data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "OTP registered successfully", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(getApplicationContext(), ForgotPwdNewpwdActivity.class);
                         startActivity(intent);
                         finish();
                     } else if (success.equals("false")) {
-                        Toast.makeText(getApplicationContext(), "data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "OTP Failed", Toast.LENGTH_SHORT).show();
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Failed! Enter valid OTP", Toast.LENGTH_SHORT).show();

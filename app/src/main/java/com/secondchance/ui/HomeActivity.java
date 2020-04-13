@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     //TextView emailid_text;
     TextView username_text;
     StorageUtil mStore;
-
+View navheader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
 //        emailid_text = findViewById(R.id.emailid_text);
         username_text = findViewById(R.id.username_text);
         mStore = StorageUtil.getInstance(getApplicationContext());
+        mStore.setString("DashboardEnabled","true");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -46,9 +48,10 @@ public class HomeActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        username_text = navigationView.findViewById(R.id.username_txt);
-//        if(mStore.getString("USERNAME")!=null)
-//            username_text.setText(mStore.getString("USERNAME"));
+        navheader= navigationView.getHeaderView(0);
+        username_text = navheader.findViewById(R.id.username_txt);
+        if(mStore.getString("USERNAME")!=null)
+            username_text.setText(mStore.getString("USERNAME"));
         navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -95,6 +98,8 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 // Write your code here to invoke YES event
+                mStore.setString("DashboardEnabled","false");
+
                 Intent intent = new Intent(HomeActivity.this, WelcomeActivity.class);
                 startActivity(intent);
                 finish();

@@ -7,7 +7,7 @@ public class Configuration {
 
     public static final String HEADER_KEY = "Content-Type";
     public static final String HEADER_VALUE = "application/json"; // UAT
-
+    public static final String FirstTime = "FirstTime";
 
 
 

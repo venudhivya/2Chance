@@ -1,25 +1,27 @@
-package com.secondchance.ui.forgotpassword;
+package com.secondchance.ui.myaccount;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.secondchance.R;
 import com.secondchance.SecondChanceApplication;
 import com.secondchance.model.forgotpwdchangereponse;
-import com.secondchance.model.forgotpwdreponsemodel;
 import com.secondchance.model.resetpwdrequestodel;
-import com.secondchance.model.resetpwdwithOTPModel;
 import com.secondchance.service.RetrofitApi;
 import com.secondchance.service.RetrofitRestClient;
+import com.secondchance.ui.HomeActivity;
 import com.secondchance.ui.login.LoginActivity;
 import com.secondchance.utils.Configuration;
 import com.secondchance.utils.StorageUtil;
@@ -28,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ForgotPwdReenterActivity extends AppCompatActivity implements View.OnClickListener {
+public class ChangePasswordFragment extends Fragment implements View.OnClickListener {
     SecondChanceApplication secondChanceApplication;
     StorageUtil mStore;
     EditText current_password;
@@ -40,25 +42,24 @@ public class ForgotPwdReenterActivity extends AppCompatActivity implements View.
     TextInputLayout current_pwd_textinput;
     TextInputLayout newpwd_textinput;
     TextInputLayout confirm_textinput;
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.changepwdlayout, container, false);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fadeout, R.anim.fadein);
-        setContentView(R.layout.forgotpwd_reenter_layout);
-        secondChanceApplication = (SecondChanceApplication) getApplicationContext();
-        mStore = StorageUtil.getInstance(getApplicationContext());
-        current_password = findViewById(R.id.current_password);
-        confirm_password = findViewById(R.id.confirm_password);
-        new_password = findViewById(R.id.new_password);
-        current_pwd_textinput = findViewById(R.id.current_pwd_textinput);
-        newpwd_textinput = findViewById(R.id.newpwd_textinput);
-        confirm_textinput = findViewById(R.id.confirm_textinput);
-        done = findViewById(R.id.next_btn);
+        secondChanceApplication = (SecondChanceApplication) getActivity().getApplication();
+        mStore = StorageUtil.getInstance(getActivity());
+        current_password =root. findViewById(R.id.current_password);
+        confirm_password = root.findViewById(R.id.confirm_password);
+        new_password = root.findViewById(R.id.new_password);
+        current_pwd_textinput = root.findViewById(R.id.current_pwd_textinput);
+        newpwd_textinput =root. findViewById(R.id.newpwd_textinput);
+        confirm_textinput = root.findViewById(R.id.confirm_textinput);
+        done =root. findViewById(R.id.next_btn);
         done.setOnClickListener(this);
-        loading = findViewById(R.id.loading);
-        back_img = findViewById(R.id.back_img);
-        back_img.setOnClickListener(this);
+        loading = root.findViewById(R.id.loading);
+
+
+        return root;
     }
 
     private void callreenterpwdwithApi() {
@@ -82,16 +83,16 @@ public class ForgotPwdReenterActivity extends AppCompatActivity implements View.
 
 
                     if (success.equals("true")) {
-                        Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), data, Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        Intent intent = new Intent(getActivity(), HomeActivity.class);
                         startActivity(intent);
-                        finish();
+                        getActivity().finish();
                     } else if (success.equals("false")) {
-                        Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), data, Toast.LENGTH_SHORT).show();
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "Failed to validate Password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Failed to validate Password", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -101,7 +102,7 @@ public class ForgotPwdReenterActivity extends AppCompatActivity implements View.
                 @Override
                 public void onFailure(Call<forgotpwdchangereponse> call, Throwable t) {
                     loading.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), "Failed to validate OTP", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Failed to validate OTP", Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -109,7 +110,7 @@ public class ForgotPwdReenterActivity extends AppCompatActivity implements View.
             });
 
         } else {
-            Toast.makeText(getApplicationContext(), "Please Check your Internet Connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Please Check your Internet Connection", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -160,20 +161,17 @@ public class ForgotPwdReenterActivity extends AppCompatActivity implements View.
                     if (!new_password.getText().toString().equals(current_password.getText().toString())) {
                         callreenterpwdwithApi();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Current password and New password shold be different!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Current password and New password shold be different!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "New password and conformed password shoud be same!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "New password and conformed password shoud be same!", Toast.LENGTH_SHORT).show();
                 }
 
 
             }
 
 
-        } else if (id == R.id.back_img) {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-            finish();
         }
     }
 }
+
