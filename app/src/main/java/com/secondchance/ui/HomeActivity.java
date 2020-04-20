@@ -16,9 +16,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 import com.secondchance.R;
+import com.secondchance.ui.home.adapter.SectionsPagerAdapter;
 import com.secondchance.ui.login.WelcomeActivity;
 import com.secondchance.utils.StorageUtil;
 
@@ -39,6 +42,12 @@ View navheader;
         username_text = findViewById(R.id.username_text);
         mStore = StorageUtil.getInstance(getApplicationContext());
         mStore.setString("DashboardEnabled","true");
+
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(sectionsPagerAdapter);
+        TabLayout tabs = findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -89,12 +98,12 @@ View navheader;
 //        alertDialog.setTitle("Confirm Delete...");
 
         // Setting Dialog Message
-        alertDialog.setMessage("Are you sure you want Logout?");
+        alertDialog.setMessage(R.string.logout_msg);
 
         // Setting Icon to Dialog
 
         // Setting Positive "Yes" Button
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(R.string.yes_btn, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
 
                 // Write your code here to invoke YES event
@@ -107,7 +116,7 @@ View navheader;
         });
 
         // Setting Negative "NO" Button
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(R.string.no_btn, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Write your code here to invoke NO event
                 dialog.cancel();

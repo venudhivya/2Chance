@@ -15,12 +15,22 @@
     <string name="menu_subscription">Subscription</string>
     <string name="change_password">Change Password</string>
     <string name="menu_logout">Logout</string>
-<string name="sucess_msg">Successfully you registered.</string>
-    <string name="click_message">Click on +People button to add a new people</string>
+    <string name="sucess_msg">Successfully you registered.</string>
+    <string name="click_message">Click on <b>+People</b> button to add a new people</string>
     <string name="people_text">+PEOPLE</string>
     <string name="password_text">Password Changed.</string>
     <string name="password_sucess_msg">Your Password has been reset suceessfully.</string>
     <string name="continue_txt">CONTINUE</string>
+    <string name="edit_text"><u>Edit</u></string>
+    <string name="your_name">Your Name</string>
+    <string name="dob">Date of Birth</string>
+    <string name="parent_name">Parent\'s Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="whatsapp_no">Whatsapp Number</string>
+    <string name="facebook_id">Facebook Id</string>
+    <string name="instagram_id">Instagram Id</string>
+    <string name="choose_deliver_date">Choose Deliver Date</string>
 
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -54,8 +64,16 @@
     <string name="verification_code">Please enter your verfication code</string>
     <string name="verification_code1">We have send you a  verification code to your registered email ID.</string>
     <string name="done">DONE</string>
-    <string name="name_error">Please enter your name</string>
-    <string name="phone_error">Please enter a phone number</string>
+0    <string name="name_error">Please enter your name</string>
+    <string name="phone_error">Please enter your phone number</string>
+    <string name="watsapp_error">Please enter your whatsapp phone number</string>
+    <string name="facebook_error">Please enter your facebook id</string>
+
+    <string name="insta_error">Please enter your instagram id</string>
+
+    <string name="parentsname_error">Please enter your parent\'s name</string>
+    <string name="dob_error">Please choose ypur Date of Birth</string>
+
     <string name="error_invalid_phone">Please enter a valid phone number</string>
     <string name="email_error">Please enter a email address</string>
     <string name="error_invalid_email">Email is not valid</string>
@@ -66,4 +84,35 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="messages_txt">+Message</string>
+    <string name="upcoming_msg">Upcoming Messages</string>
+    <string name="previous_msg">Previous Messages</string>
+    <string name="empty_screen">We do not have anything\nhere right now. Please Retry</string>
+    <string name="btn_retry">Retry</string>
+    <string name="new_msg">NEW MESSAGE</string>
+    <string name="messages">MESSAGES</string>
+    <string name="peoples">PEOPLES</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="maxsize">(Max Size is 10 mb)</string>
+    <string name="save">SAVE</string>
+    <string name="people_success_msg">PEOPLE CREATED SUCCESSFULLY</string>
+    <string name="people_suceess_nominate1">You created profile successfully, Want to nominatee the user. <u>Click Here</u> to the Nominate Page.</string>
+<string name="yes_btn">YES</string>
+    <string name="no_btn">NO</string>
+    <string name="logout_msg">Are you sure you want Logout?</string>
+    <string name="birthday">Birthday</string>
+    <string name="newyear">New Year</string>
+<string name="christmas">Christmas</string>
+    <!-- Button text -->
+    <string name="btn_logout_from_google">Logout from Google</string>
+    <string name="btn_revoke_access">Revoke Access</string>
+    <string name="loading">Loading...</string>
+    <string name="msg_details">Message Details</string>
+    <string name="msg_deliver_date">Message Deliver Date</string>
+    <string name="msg_deliver_type">Message Deliver Type</string>
+    <string name="text">Text</string>
+    <string name="voice">Voice/Video</string>
+
+    <string name="facebook_app_id">851027302074421</string>
+    <string name="fb_login_protocol_scheme">fb851027302074421</string>
 </resources>

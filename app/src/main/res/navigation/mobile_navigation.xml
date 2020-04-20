@@ -9,7 +9,15 @@
         android:id="@+id/nav_home"
         android:name="com.secondchance.ui.home.HomeFragment"
         android:label="@string/menu_dashboard"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/nav_addpeople"
+            app:destination="@id/nav_addpeople" />
+        />
+    </fragment>
+
+
 
 
     <fragment
@@ -18,10 +26,8 @@
         android:label="@string/menu_myaccount"
         tools:layout="@layout/fragment_myaccount" >
 
-
-
         <action
-            android:id="@+id/navigate_to_product_detail"
+            android:id="@+id/nav_changepassword"
             app:destination="@id/nav_changepassword" />
     </fragment>
 
@@ -31,6 +37,35 @@
         android:name="com.secondchance.ui.myaccount.ChangePasswordFragment"
         android:label="Change Password"
         tools:layout="@layout/changepwdlayout" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/nav_newmessage"
+        android:name="com.secondchance.ui.message.NewMessageFragment"
+        android:label="New Message"
+        tools:layout="@layout/newmsg_layout" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_msgdetail"
+        android:name="com.secondchance.ui.message.MessageDetailFragment"
+        android:label="Birthday Message"
+        tools:layout="@layout/msg_detail_layout" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/nav_pendingnominate"
+        android:name="com.secondchance.ui.pendingnominate.PendingNominateFragment"
+        android:label="Pending Nominate"
+        tools:layout="@layout/pending_nominate_layout" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/nav_addpeople"
+        android:name="com.secondchance.ui.home.AddpeopleFragment"
+        android:label="New People"
+        tools:layout="@layout/addpeople_layout" >
 
     </fragment>
 

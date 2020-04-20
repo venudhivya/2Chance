@@ -104,13 +104,13 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
                     mStore.setString("USERACTIVITY","REGISTER");
                     String message = data.getMessage();
 
-                    if (success.equals("true")) {
+                    if (success!=null && success.equals("true")) {
                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
                         finish();
-                    } else if (success.equals("false")) {
+                    } else if (success!=null && success.equals("false")) {
                         Toast.makeText(getApplicationContext(), "User already exist", Toast.LENGTH_SHORT).show();
 
                     } else {
@@ -154,9 +154,7 @@ public class RegisterAppActivity extends AppCompatActivity implements View.OnCli
             startActivity(intent);
             finish();
         } else if (id == R.id.facebook_img) {
-            Intent intent = new Intent(this, ForgotPwdReenterActivity.class);
-            startActivity(intent);
-            finish();
+
         }
 
     }

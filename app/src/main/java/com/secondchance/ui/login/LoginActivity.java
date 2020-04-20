@@ -6,6 +6,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,8 @@ import com.secondchance.service.RetrofitRestClient;
 import com.secondchance.ui.HomeActivity;
 import com.secondchance.ui.forgotpassword.ForgotPasswordActivity;
 import com.secondchance.ui.register.RegisterAppActivity;
+import com.secondchance.ui.sociallogin.FacebookActivity;
+import com.secondchance.ui.sociallogin.GooglePlusActivity;
 import com.secondchance.utils.Configuration;
 import com.secondchance.utils.StorageUtil;
 
@@ -46,6 +49,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextInputLayout email_textinputlayout;
     TextInputLayout password_textinputlayout;
     StorageUtil mStore;
+    ImageView google_img;
+    ImageView facebook_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         secondChanceApplication = (SecondChanceApplication) getApplicationContext();
         loading = findViewById(R.id.loading);
+        google_img = findViewById(R.id.google_img);
+        facebook_img = findViewById(R.id.facebook_img);
         email_textinputlayout = findViewById(R.id.email_textinputlayout);
         password_textinputlayout = findViewById(R.id.password_textinputlayout);
         password = findViewById(R.id.password);
@@ -66,6 +73,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         login_btn.setOnClickListener(this);
         register_btn.setOnClickListener(this);
         forgot_pwd_text.setOnClickListener(this);
+        google_img.setOnClickListener(this);
+        facebook_img.setOnClickListener(this);
     }
 
     private void callLoginApi() {
@@ -81,18 +90,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onResponse(Call<loginreponsemodel> call, Response<loginreponsemodel> response) {
                     loading.setVisibility(View.GONE);
-                    mStore.setString("USERACTIVITY","LOGIN");
+                    mStore.setString("USERACTIVITY", "LOGIN");
 
                     loginreponsemodel loginreponsemodel = response.body();
                     String success = loginreponsemodel.getSuccess();
                     data data = loginreponsemodel.getData();
-                    String email = data.getEmail();
-                    String password = data.getPassword();
-                    mStore.setString("USERNAME", data.getUser_name());
-                    mStore.setString("PHONENUMBER",data.getPhone_number());
-                    mStore.setString("emailid", data.getEmail());
+                    if (data != null) {
+                        if (data.getUser_name() != null) {
+                            mStore.setString("USERNAME", data.getUser_name());
 
+                        }
+                        if (data.getPhone_number() != null) {
+                            mStore.setString("PHONENUMBER", data.getPhone_number());
 
+                        }
+                        if (data.getEmail() != null) {
+                            mStore.setString("emailid", data.getEmail());
+
+                        }
+                    }
                     if (success.equals("true")) {
                         Toast.makeText(getApplicationContext(), "LOGIN Successfull", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
@@ -171,6 +187,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Intent intent = new Intent(this, ForgotPasswordActivity.class);
             startActivity(intent);
             finish();
+        } else if (id == R.id.google_img) {
+            Intent intent = new Intent(this, GooglePlusActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.facebook_img) {
+            Intent intent = new Intent(this, FacebookActivity.class);
+            startActivity(intent);
         }
 
     }

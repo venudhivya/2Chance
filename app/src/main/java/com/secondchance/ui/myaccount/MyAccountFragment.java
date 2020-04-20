@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.secondchance.R;
@@ -37,9 +38,8 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener{
         int id = v.getId();
         if(id == R.id.changepassword_txt)
         {
-          Intent intent = new Intent (getActivity(),ForgotPwdReenterActivity.class);
-          startActivity(intent);
-         getActivity(). finish();
+            Navigation.findNavController(v).navigate(R.id.nav_changepassword);
+
 
         }
     }

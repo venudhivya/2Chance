@@ -50,7 +50,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/register_btn"
+            android:id="@+id/people_btn"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_gravity="center"
@@ -76,15 +76,158 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical"
+        android:visibility="visible">
+
+
+        <LinearLayout
+            android:id="@+id/linear_msg_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/roundedbutton"
+                    android:padding="5dp"
+                    android:text="@string/upcoming_msg"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"></Button>
+
+                <LinearLayout
+                    android:id="@+id/lineA"
+                    android:layout_width="2dp"
+                    android:layout_height="55dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <!--            <view-->
+                <!--                android:layout_width="2dp"-->
+                <!--                android:layout_height="50dp"-->
+                <!--                android:background="@color/gray"></view>-->
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/roundedbutton"
+                    android:padding="5dp"
+                    android:text="@string/previous_msg"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+
+                    android:textStyle="bold"></Button>
+            </LinearLayout>
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:visibility="visible">
+
+                <ProgressBar
+                    android:id="@+id/progress_circular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:visibility="invisible" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/new_msg_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/roundedbutton"
+                android:paddingLeft="70dp"
+                android:paddingRight="70dp"
+                android:text="@string/new_msg"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linear_people_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical"
         android:visibility="gone">
 
-        <TextView
-            android:id="@+id/username_text"
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:visibility="visible">
+
+            <ProgressBar
+                android:id="@+id/progress_circular_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mRecyclerView_people"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/add_people_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Welcome"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="34dp"
+            android:background="@drawable/roundedbutton"
+            android:paddingLeft="80dp"
+            android:paddingRight="80dp"
+            android:text="@string/people_text"
             android:textSize="18sp"
-            android:textStyle="bold"></TextView>
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
+
+
+    </LinearLayout>
+
 </LinearLayout>
